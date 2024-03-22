@@ -16,9 +16,25 @@ require (
 	github.com/line/line-bot-sdk-go v7.8.0+incompatible
 	github.com/mmcdole/gofeed v0.0.0-20170307182009-042c0a912158
 	github.com/robfig/cron v0.0.0-20160927164231-9585fd555638
+	golang.ngrok.com/ngrok v1.9.1
 	golang.org/x/net v0.20.0
 	gopkg.in/h2non/gock.v1 v1.0.7
 	gopkg.in/mailgun/mailgun-go.v1 v1.0.2
+)
+
+require (
+	github.com/go-stack/stack v1.8.1 // indirect
+	github.com/inconshreveable/log15 v3.0.0-testing.3+incompatible // indirect
+	github.com/inconshreveable/log15/v3 v3.0.0-testing.5 // indirect
+	github.com/jpillora/backoff v1.0.0 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-isatty v0.0.16 // indirect
+	go.uber.org/multierr v1.11.0 // indirect
+	golang.ngrok.com/muxado/v2 v2.0.0 // indirect
+	golang.org/x/sync v0.3.0 // indirect
+	golang.org/x/term v0.16.0 // indirect
+	google.golang.org/protobuf v1.31.0 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
 require (
@@ -29,7 +45,6 @@ require (
 	github.com/mmcdole/goxpp v0.0.0-20160419160217-e38884aa48c1 // indirect
 	github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32 // indirect
 	github.com/russross/blackfriday v1.6.0
-	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect

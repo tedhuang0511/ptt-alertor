@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"golang.ngrok.com/ngrok"
+	"golang.ngrok.com/ngrok/config"
 	"net/http"
 	"os"
 	"os/signal"
@@ -62,6 +64,8 @@ func basicAuth(handle httprouter.Handle) httprouter.Handle {
 func main() {
 	log.Info("Start Jobs")
 	startJobs()
+
+	//server.StartNgrokServer()
 
 	router := newRouter()
 	m := messenger.New()
@@ -130,6 +134,22 @@ func main() {
 		}
 	}()
 
+	tun, err := ngrok.Listen(context.Background(),
+		config.HTTPEndpoint(config.WithDomain(os.Getenv("NGROK_DOMAIN"))),
+		ngrok.WithAuthtokenFromEnv(),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Application available at:", tun.URL())
+
+	go func() {
+		err = http.Serve(tun, srv.Handler)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
+
 	// graceful shutdown
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
@@ -137,6 +157,10 @@ func main() {
 	log.Info("Shutdown Web Server...")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
+	if err := tun.CloseWithContext(ctx); err != nil {
+		log.Printf("Error closing ngrok tunnel: %v\n", err)
+	}
+	log.Println("ngrok server gracefully stopped")
 	if err := srv.Shutdown(ctx); err != nil {
 		log.WithError(err).Fatal("Web Server Showdown Failed")
 	}
