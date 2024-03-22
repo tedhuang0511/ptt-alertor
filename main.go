@@ -17,6 +17,7 @@ import (
 	"github.com/Ptt-Alertor/ptt-alertor/channels/telegram"
 	ctrlr "github.com/Ptt-Alertor/ptt-alertor/controllers"
 	"github.com/Ptt-Alertor/ptt-alertor/jobs"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 var (
